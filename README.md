@@ -1,4 +1,4 @@
 Capple-mod
 ==========
 
-My mod
+My newbie mod.
