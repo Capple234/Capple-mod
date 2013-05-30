@@ -1,4 +1,4 @@
-package capple.mod.Redstonetut.common;
+ackage capple.mod.Redstonetut.common;
 
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,13 +8,9 @@ import org.lwjgl.input.Keyboard;
 import capple.mod.Redstonetut.Armor.ItemObidianLeggings;
 import net.minecraft.entity.*;
 import capple.mod.Redstonetut.block.GunpowderOre;
-import capple.mod.Redstonetut.Armor.ItemDiaHelmLC;
-import capple.mod.Redstonetut.Armor.ItemGoldHelmLC;
-import capple.mod.Redstonetut.Armor.ItemIronHelmLC;
 import capple.mod.Redstonetut.Armor.ItemObsidianBoots;
 import capple.mod.Redstonetut.Armor.ItemObsidianChestplate;
 import capple.mod.Redstonetut.Armor.ItemObsidianHelmet;
-import capple.mod.Redstonetut.Armor.ItemRedHelmLC;
 import capple.mod.Redstonetut.Armor.ItemRedstoneBoots;
 import capple.mod.Redstonetut.Armor.ItemRedstoneChestplate;
 import capple.mod.Redstonetut.Armor.ItemRedstoneHelmet;
@@ -34,6 +30,7 @@ import capple.mod.Redstonetut.tool.ItemObsidianHoe;
 import capple.mod.Redstonetut.tool.ItemObsidianPickaxe;
 import capple.mod.Redstonetut.tool.ItemObsidianShovel;
 import capple.mod.Redstonetut.tool.ItemObsidianSword;
+import capple.mod.Redstonetut.tool.ItemPorkchopSword;
 import capple.mod.Redstonetut.tool.ItemRedstoneAxe;
 import capple.mod.Redstonetut.tool.ItemRedstoneHoe;
 import capple.mod.Redstonetut.tool.ItemRedstonePickaxe;
@@ -71,14 +68,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class RedstoneTUT {
-  @SidedProxy(clientSide = "capple.mod.Redstonetut.client.ClientProxy", serverSide = "capple.mod.Redstonetut.common.CommonProxy")
+	@SidedProxy(clientSide = "capple.mod.Redstonetut.client.ClientProxy", serverSide = "capple.mod.Redstonetut.common.CommonProxy")
 	@Instance("RedstoneTUT")
 	
 	
 	public static RedstoneTUT instance;
-	public static CommonProxy proxy; 
+	public static Item PorkchopSword;
 	public static final StepSound soundStoneFootstep = new StepSound("stone", 1.0F, 1.0F);
-	public static Item GlowstoneCore;
 	public static Item RedstonePickaxe;
 	public static Item RedstoneSword;
 	public static Item RedstoneShovel;
@@ -100,24 +96,15 @@ public class RedstoneTUT {
 	public static Item ObsidianLeggings;
 	public static Item RedstoneBoots;
 	public static Item ObsidianBoots;
-	public static Item IronHelmLC;
-	public static Item GoldHelmLC;
-	public static Item DiaHelmLC;
-	public static Item RedHelmLC;
 	public static Block ObsidianOre;
 	public static Block GunpowderOre;
 	public static Item CoalPickaxe;
 	public static Item CoalIngot;
+	public static CommonProxy proxy;
 	
     
 	
-	
-	
-	
-	public static EnumArmorMaterial armorGoldLC = EnumHelper.addArmorMaterial("GOLDLC", 7, new int[]{2, 5, 3, 1}, 25 );
-	public static EnumArmorMaterial armorDiaLC = EnumHelper.addArmorMaterial("DIALC", 33, new int[]{3, 8, 6, 3}, 10 );
-	public static EnumArmorMaterial armorIronLC = EnumHelper.addArmorMaterial("IRONLC", 15, new int[]{2, 6, 5, 2}, 9 );
-	public static EnumArmorMaterial armorRedstoneLC = EnumHelper.addArmorMaterial("REDSTONELC", 44, new int []{3, 7, 6, 3}, 8 );
+	public static EnumToolMaterial toolPorkchop = EnumHelper.addToolMaterial("PORKCHOP", 0, 80, 1.0F, 0, 15);
 	public static EnumArmorMaterial armorRedstone = EnumHelper.addArmorMaterial("REDSTONE", 44, new int []{3, 7, 6, 3}, 8 );
 	public static EnumArmorMaterial armorObsidian = EnumHelper.addArmorMaterial("OBSIDIAN", 44, new int []{6, 11, 9, 5}, 7 );
 	public static EnumToolMaterial toolRedstone = EnumHelper.addToolMaterial("REDSTONE", 2, 350, 7.0F, 2, 12);
@@ -128,13 +115,9 @@ public class RedstoneTUT {
 public RedstoneTUT () {
 
 	
+	PorkchopSword = new ItemPorkchopSword(1030, toolPorkchop).setUnlocalizedName("PorkchopSword").setCreativeTab(CreativeTabs.tabCombat);
 	CoalIngot = new ItemCoalIngot(1029).setUnlocalizedName("CoalIngot").setCreativeTab(CreativeTabs.tabMaterials);
 	CoalPickaxe = new ItemCoalPickaxe(1028, toolCoal).setUnlocalizedName("CoalPickaxe").setCreativeTab(CreativeTabs.tabTools);
-	RedHelmLC = new ItemRedHelmLC(1027, armorRedstone, proxy.addArmor("Redstone"), 0).setUnlocalizedName("RedHelmLC").setCreativeTab(CreativeTabs.tabCombat);
-	DiaHelmLC = new ItemDiaHelmLC(1026, armorDiaLC, proxy.addArmor("DiaLC"), 0).setUnlocalizedName("DiaHelmLC").setCreativeTab(CreativeTabs.tabCombat);
-	GoldHelmLC = new ItemGoldHelmLC(1025, armorGoldLC, proxy.addArmor("GoldLC"), 0).setUnlocalizedName("GoldHelmLC").setCreativeTab(CreativeTabs.tabCombat);
-	IronHelmLC = new ItemIronHelmLC(1024, armorIronLC, proxy.addArmor("IronLC"), 0).setUnlocalizedName("GoldHelmLC").setCreativeTab(CreativeTabs.tabCombat);
-	GlowstoneCore = new ItemGlowstoneCore(1023).setUnlocalizedName("GlowstoneCore").setCreativeTab(CreativeTabs.tabMaterials);
 	RedstonePickaxe = new ItemRedstonePickaxe(1000, toolRedstone).setUnlocalizedName("RedstonePickaxe").setCreativeTab(CreativeTabs.tabTools);
 	RedstoneSword = new ItemRedstoneSword(1001, toolRedstone).setUnlocalizedName("RedstoneSword").setCreativeTab(CreativeTabs.tabCombat);
 	RedstoneShovel = new ItemRedstoneShovel(1002, toolRedstone).setUnlocalizedName("RedstoneShovel").setCreativeTab(CreativeTabs.tabTools);
@@ -169,13 +152,6 @@ public RedstoneTUT () {
 	GameRegistry.registerWorldGenerator(new GunpowderOreWorldGeneration() ) ;
 
 	
-	LanguageRegistry.addName(CoalIngot, "Coal Ingot");
-	LanguageRegistry.addName(CoalPickaxe, "Coal Pickaxe");
-	LanguageRegistry.addName(RedHelmLC, "Light core Redstone Helmet");
-	LanguageRegistry.addName(GoldHelmLC, "Light core Gold Helmet");
-	LanguageRegistry.addName(DiaHelmLC, "Light core Diamond Helmet");
-	LanguageRegistry.addName(IronHelmLC, "Light core Iron Helmet");
-	LanguageRegistry.addName(GlowstoneCore, "Light Core");
 	LanguageRegistry.addName(RedstoneBoots, "Redstone Boots");
 	LanguageRegistry.addName(RedstoneLeggings, "Redstone Leggings");
 	LanguageRegistry.addName(RedstoneChestplate, "Redstone Chestplate");
@@ -199,12 +175,14 @@ public RedstoneTUT () {
 	LanguageRegistry.addName(RedstoneAxe, "Redstone Axe");
 	LanguageRegistry.addName(RedstoneHoe, "Redstone Hoe");
 	LanguageRegistry.addName(GunpowderOre, "Gunpowder Ore");
-	 
+	LanguageRegistry.addName(PorkchopSword, "Porkchop Sword");
+	LanguageRegistry.addName(CoalIngot, "Coal Ingot");
+	
 	
 	
 	
 	GameRegistry.addRecipe(new ItemStack(RedstoneBoots, 1), new Object[] {
-		"   ", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
+		"", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
 	
 	GameRegistry.addRecipe(new ItemStack(RedstoneLeggings, 1), new Object[] {
 		"XXX", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
@@ -268,26 +246,14 @@ public RedstoneTUT () {
 		"XX ", " * ", " * ", Character.valueOf('X'), RedstoneIngot, 
 		Character.valueOf('*'), Item.stick});
 	
-	GameRegistry.addRecipe(new ItemStack(DiaHelmLC, 1), new Object[] {
-		" X ", " * ", "", Character.valueOf('X'), GlowstoneCore,
-		Character.valueOf('*'), Item.helmetDiamond});
-	
-	GameRegistry.addRecipe(new ItemStack(IronHelmLC, 1), new Object[] {
-		" X ", " * ", "", Character.valueOf('X'), GlowstoneCore,
-		Character.valueOf('*'), Item.helmetIron});
-	
-	GameRegistry.addRecipe(new ItemStack(GoldHelmLC, 1), new Object[] {
-		" X ", " * ", "", Character.valueOf('X'), GlowstoneCore,
-		Character.valueOf('*'), Item.helmetGold});
-	
-	GameRegistry.addRecipe(new ItemStack(RedHelmLC, 1), new Object[] {
-		" X ", " * ", "", Character.valueOf('X'), GlowstoneCore,
-		Character.valueOf('*'), RedstoneHelmet});
 	
 	GameRegistry.addRecipe(new ItemStack(CoalPickaxe, 1), new Object [] {
 		"XXX", " * ", " * ", Character.valueOf('X'), CoalIngot,
 		Character.valueOf('*'), Item.stick });
 	
+	GameRegistry.addRecipe(new ItemStack(PorkchopSword, 1), new Object[] {
+		" X ", " X ", " * ", Character.valueOf('X'), Item.porkRaw,
+		Character.valueOf('*'), Item.stick});
 	
 	}
 	
@@ -297,6 +263,7 @@ public RedstoneTUT () {
 	public void load(FMLInitializationEvent event){
 	smeltingRecipes();
 	BlockHarvestLevel();
+	
 	
 	
 	
@@ -328,9 +295,7 @@ public RedstoneTUT () {
 		
 
 	
-	KeyBinding[] key = new KeyBinding[]{new KeyBinding("G", Keyboard.KEY_G)};
-    boolean[] repeat = {false};
-    PanicKey ppp = new PanicKey(key, repeat); KeyBindingRegistry.registerKeyBinding(ppp);
+	
 
     
 
