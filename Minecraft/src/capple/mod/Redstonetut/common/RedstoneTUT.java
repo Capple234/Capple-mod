@@ -70,7 +70,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RedstoneTUT {
 	@SidedProxy(clientSide = "capple.mod.Redstonetut.client.ClientProxy", serverSide = "capple.mod.Redstonetut.common.CommonProxy")
 	@Instance("RedstoneTUT")
-	
+	public static CommonProxy proxy;
 	
 	public static RedstoneTUT instance;
 	public static Item PorkchopSword;
@@ -100,7 +100,7 @@ public class RedstoneTUT {
 	public static Block GunpowderOre;
 	public static Item CoalPickaxe;
 	public static Item CoalIngot;
-	public static CommonProxy proxy;
+	
 	
     
 	
