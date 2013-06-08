@@ -1,4 +1,4 @@
-ackage capple.mod.Redstonetut.common;
+package capple.mod.Redstonetut.common;
 
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -68,9 +68,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class RedstoneTUT {
-	@SidedProxy(clientSide = "capple.mod.Redstonetut.client.ClientProxy", serverSide = "capple.mod.Redstonetut.common.CommonProxy")
 	@Instance("RedstoneTUT")
+	@SidedProxy(clientSide = "capple.mod.Redstonetut.client.ClientProxy", serverSide = "capple.mod.Redstonetut.common.CommonProxy")
 	public static CommonProxy proxy;
+	
 	
 	public static RedstoneTUT instance;
 	public static Item PorkchopSword;
@@ -100,6 +101,12 @@ public class RedstoneTUT {
 	public static Block GunpowderOre;
 	public static Item CoalPickaxe;
 	public static Item CoalIngot;
+	public static Item Bluestone;
+	public static Item BoneSword;
+	public static Item WoolSword;
+	public static Item LeatherSword;
+	
+	
 	
 	
     
@@ -114,7 +121,6 @@ public class RedstoneTUT {
 	
 public RedstoneTUT () {
 
-	
 	PorkchopSword = new ItemPorkchopSword(1030, toolPorkchop).setUnlocalizedName("PorkchopSword").setCreativeTab(CreativeTabs.tabCombat);
 	CoalIngot = new ItemCoalIngot(1029).setUnlocalizedName("CoalIngot").setCreativeTab(CreativeTabs.tabMaterials);
 	CoalPickaxe = new ItemCoalPickaxe(1028, toolCoal).setUnlocalizedName("CoalPickaxe").setCreativeTab(CreativeTabs.tabTools);
@@ -144,13 +150,12 @@ public RedstoneTUT () {
 	
 	
 	
-	
-	
 	GameRegistry.registerBlock(GunpowderOre);
 	GameRegistry.registerBlock(ObsidianOre);
 	GameRegistry.registerWorldGenerator(new ObsidianOreWorldGeneration() ) ;
 	GameRegistry.registerWorldGenerator(new GunpowderOreWorldGeneration() ) ;
 
+	
 	
 	LanguageRegistry.addName(RedstoneBoots, "Redstone Boots");
 	LanguageRegistry.addName(RedstoneLeggings, "Redstone Leggings");
@@ -181,8 +186,6 @@ public RedstoneTUT () {
 	
 	
 	
-	GameRegistry.addRecipe(new ItemStack(RedstoneBoots, 1), new Object[] {
-		"", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
 	
 	GameRegistry.addRecipe(new ItemStack(RedstoneLeggings, 1), new Object[] {
 		"XXX", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
@@ -192,7 +195,6 @@ public RedstoneTUT () {
 	
 	GameRegistry.addRecipe(new ItemStack(RedstoneHelmet, 1), new Object[] {
 		"XXX", "X X", "   ", Character.valueOf('X'), RedstoneIngot});
-	
 	
 	GameRegistry.addRecipe(new ItemStack(ObsidianBoots, 1), new Object[] {
 		"   ", "X X", "X X", Character.valueOf('X'), ObsidianIngot});
@@ -255,6 +257,8 @@ public RedstoneTUT () {
 		" X ", " X ", " * ", Character.valueOf('X'), Item.porkRaw,
 		Character.valueOf('*'), Item.stick});
 	
+	GameRegistry.addRecipe(new ItemStack(RedstoneBoots, 1), new Object[] {
+		"   ", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
 	}
 	
 
@@ -294,7 +298,6 @@ public RedstoneTUT () {
 	
 		
 
-	
 	
 
     
