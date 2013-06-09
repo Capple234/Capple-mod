@@ -19,12 +19,16 @@ import capple.mod.Redstonetut.WorldGeneration.GunpowderOreWorldGeneration;
 import capple.mod.Redstonetut.WorldGeneration.ObsidianOreWorldGeneration;
 import capple.mod.Redstonetut.block.ObsidianOre;
 import capple.mod.Redstonetut.client.ClientProxy;
+import capple.mod.Redstonetut.item.ItemBluestone;
 import capple.mod.Redstonetut.item.ItemCoalIngot;
 import capple.mod.Redstonetut.item.ItemGlowstoneCore;
 import capple.mod.Redstonetut.item.ItemObsidianDust;
 import capple.mod.Redstonetut.item.ItemObsidianIngot;
 import capple.mod.Redstonetut.item.ItemRedstoneIngot;
+import capple.mod.Redstonetut.tool.ItemBoneSword;
 import capple.mod.Redstonetut.tool.ItemCoalPickaxe;
+import capple.mod.Redstonetut.tool.ItemFeatherSword;
+import capple.mod.Redstonetut.tool.ItemLeatherSword;
 import capple.mod.Redstonetut.tool.ItemObsidianAxe;
 import capple.mod.Redstonetut.tool.ItemObsidianHoe;
 import capple.mod.Redstonetut.tool.ItemObsidianPickaxe;
@@ -36,6 +40,7 @@ import capple.mod.Redstonetut.tool.ItemRedstoneHoe;
 import capple.mod.Redstonetut.tool.ItemRedstonePickaxe;
 import capple.mod.Redstonetut.tool.ItemRedstoneShovel;
 import capple.mod.Redstonetut.tool.ItemRedstoneSword;
+import capple.mod.Redstonetut.tool.ItemWoolSword;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
@@ -63,16 +68,16 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "Capple's UNBELIEVABLE mod", name = "RedstoneTUT", version = "1.0")
+@Mod(modid = "Capple's UNBELIEVABLE mod", name = "RedstoneTUT", version = "0.2")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 
 public class RedstoneTUT {
-	@Instance("RedstoneTUT")
 	@SidedProxy(clientSide = "capple.mod.Redstonetut.client.ClientProxy", serverSide = "capple.mod.Redstonetut.common.CommonProxy")
 	public static CommonProxy proxy;
 	
 	
+	@Instance("RedstoneTUT")
 	public static RedstoneTUT instance;
 	public static Item PorkchopSword;
 	public static final StepSound soundStoneFootstep = new StepSound("stone", 1.0F, 1.0F);
@@ -105,6 +110,7 @@ public class RedstoneTUT {
 	public static Item BoneSword;
 	public static Item WoolSword;
 	public static Item LeatherSword;
+	public static Item FeatherSword;
 	
 	
 	
@@ -121,6 +127,12 @@ public class RedstoneTUT {
 	
 public RedstoneTUT () {
 
+	ClientProxy proxy = new ClientProxy();
+	Bluestone = new ItemBluestone(1011).setUnlocalizedName("Bluestone").setCreativeTab(CreativeTabs.tabRedstone);
+	WoolSword = new ItemWoolSword(1034, toolPorkchop).setUnlocalizedName("WoolSword").setCreativeTab(CreativeTabs.tabCombat);
+	FeatherSword = new ItemFeatherSword(1033, toolPorkchop).setUnlocalizedName("FeatherSword").setCreativeTab(CreativeTabs.tabCombat);
+	LeatherSword = new ItemLeatherSword(1032, toolPorkchop).setUnlocalizedName("LeatherSword").setCreativeTab(CreativeTabs.tabCombat);
+	BoneSword = new ItemBoneSword(1031, toolPorkchop).setUnlocalizedName("BoneSword").setCreativeTab(CreativeTabs.tabCombat);
 	PorkchopSword = new ItemPorkchopSword(1030, toolPorkchop).setUnlocalizedName("PorkchopSword").setCreativeTab(CreativeTabs.tabCombat);
 	CoalIngot = new ItemCoalIngot(1029).setUnlocalizedName("CoalIngot").setCreativeTab(CreativeTabs.tabMaterials);
 	CoalPickaxe = new ItemCoalPickaxe(1028, toolCoal).setUnlocalizedName("CoalPickaxe").setCreativeTab(CreativeTabs.tabTools);
@@ -157,6 +169,12 @@ public RedstoneTUT () {
 
 	
 	
+	
+	LanguageRegistry.addName(FeatherSword, "Feather Sword");
+	LanguageRegistry.addName(WoolSword, "Wool Sword");
+	LanguageRegistry.addName(LeatherSword, "Leather Sword");
+	LanguageRegistry.addName(Bluestone, "Bluestone");
+	LanguageRegistry.addName(BoneSword, "Bone Sword");
 	LanguageRegistry.addName(RedstoneBoots, "Redstone Boots");
 	LanguageRegistry.addName(RedstoneLeggings, "Redstone Leggings");
 	LanguageRegistry.addName(RedstoneChestplate, "Redstone Chestplate");
@@ -251,7 +269,7 @@ public RedstoneTUT () {
 	
 	GameRegistry.addRecipe(new ItemStack(CoalPickaxe, 1), new Object [] {
 		"XXX", " * ", " * ", Character.valueOf('X'), CoalIngot,
-		Character.valueOf('*'), Item.stick });
+		Character.valueOf('*'), Item.stick});
 	
 	GameRegistry.addRecipe(new ItemStack(PorkchopSword, 1), new Object[] {
 		" X ", " X ", " * ", Character.valueOf('X'), Item.porkRaw,
@@ -259,6 +277,22 @@ public RedstoneTUT () {
 	
 	GameRegistry.addRecipe(new ItemStack(RedstoneBoots, 1), new Object[] {
 		"   ", "X X", "X X", Character.valueOf('X'), RedstoneIngot});
+	
+	GameRegistry.addRecipe(new ItemStack(BoneSword, 1), new Object[] {
+		" X ", " X ", " * ", Character.valueOf('X'), Item.bone,
+		Character.valueOf('*'), Item.stick});
+	
+	GameRegistry.addRecipe(new ItemStack(LeatherSword, 1), new Object[] {
+		" X ", " X ", " * ", Character.valueOf('X'), Item.leather,
+		Character.valueOf('*'), Item.stick});
+	
+	GameRegistry.addRecipe(new ItemStack(WoolSword, 1), new Object[] {
+		" X ", " X ", " * ", Character.valueOf('X'), Block.cloth,
+		Character.valueOf('*'), Item.stick});
+	
+	GameRegistry.addRecipe(new ItemStack(FeatherSword, 1), new Object[] {
+		" X ", " X ", " * ", Character.valueOf('X'), Item.feather,
+		Character.valueOf('*'), Item.stick});
 	}
 	
 
@@ -267,6 +301,7 @@ public RedstoneTUT () {
 	public void load(FMLInitializationEvent event){
 	smeltingRecipes();
 	BlockHarvestLevel();
+	MinecraftForge.EVENT_BUS.register(new FollowPlayerAdder(RedstoneTUT.PorkchopSword, false));
 	
 	
 	
@@ -288,7 +323,10 @@ public RedstoneTUT () {
 		GameRegistry.addSmelting(ObsidianDust.itemID, new ItemStack(ObsidianIngot, 1), 3.0F);
 		GameRegistry.addSmelting(Item.redstone.itemID, new ItemStack(RedstoneIngot, 1), 2.0F);
 		GameRegistry.addSmelting(Item.coal.itemID, new ItemStack(CoalIngot, 1), 1.0F);
+		GameRegistry.addSmelting(Block.obsidian.blockID, new ItemStack(ObsidianIngot, 1), 8.0F);
 		
+	
+	}
 	
 	
 
@@ -304,7 +342,7 @@ public RedstoneTUT () {
 
 	}
 
-}
+
 
 	
 
